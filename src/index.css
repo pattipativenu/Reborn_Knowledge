@@ -1,0 +1,760 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add CSS variables for brand colors */
+@layer base {
+  :root {
+    /* Brand Colors - Updated with new orange color */
+    --brand-dark-bg: #212121;
+    --brand-light-bg: #eeede9;
+    --brand-dark-text: #EAEAEA;
+    --brand-light-text: #222222;
+    --brand-muted-text: #888888;
+    --brand-accent-start: #fece0a;
+    --brand-accent-end: #fece0a;
+    
+    /* Theme switcher variables */
+    --ds-gray-700: hsla(0, 0%, 56%, 1);
+    --ds-gray-1000: hsla(0, 0%, 9%, 1);
+    --ds-shadow: rgba(0, 0, 0, 0.08);
+    
+    /* shadcn/ui compatibility */
+    --background: 238 237 233;
+    --foreground: 34 34 34;
+    --card: 238 237 233;
+    --card-foreground: 34 34 34;
+    --popover: 238 237 233;
+    --popover-foreground: 34 34 34;
+    --primary: 45 212 191;
+    --primary-foreground: 238 237 233;
+    --secondary: 244 244 245;
+    --secondary-foreground: 39 39 42;
+    --muted: 244 244 245;
+    --muted-foreground: 113 113 122;
+    --accent: 244 244 245;
+    --accent-foreground: 39 39 42;
+    --destructive: 239 68 68;
+    --destructive-foreground: 250 250 250;
+    --border: 228 228 231;
+    --input: 228 228 231;
+    --ring: 45 212 191;
+  }
+
+  .dark {
+    /* Theme switcher dark mode variables */
+    --ds-gray-700: hsla(0, 0%, 56%, 1);
+    --ds-gray-1000: hsla(0, 0%, 93%, 1);
+    --ds-shadow: rgba(255, 255, 255, 0.145);
+    
+    /* shadcn/ui dark mode */
+    --background: 33 33 33;
+    --foreground: 234 234 234;
+    --card: 33 33 33;
+    --card-foreground: 234 234 234;
+    --popover: 33 33 33;
+    --popover-foreground: 234 234 234;
+    --primary: 45 212 191;
+    --primary-foreground: 33 33 33;
+    --secondary: 39 39 42;
+    --secondary-foreground: 250 250 250;
+    --muted: 39 39 42;
+    --muted-foreground: 161 161 170;
+    --accent: 39 39 42;
+    --accent-foreground: 250 250 250;
+    --destructive: 239 68 68;
+    --destructive-foreground: 250 250 250;
+    --border: 39 39 42;
+    --input: 39 39 42;
+    --ring: 45 212 191;
+  }
+}
+
+/* Hide scrollbar globally while maintaining scroll functionality */
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+
+body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+body::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+
+/* Hide scrollbar for all elements */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+
+/* CRITICAL: Ensure footer doesn't interfere with other content */
+.main-content-wrapper.with-footer-padding {
+  /* Only apply footer padding on home page - INCREASED PADDING */
+  padding-bottom: 60vh;
+}
+
+@media (min-width: 640px) {
+  .main-content-wrapper.with-footer-padding {
+    padding-bottom: 65vh;
+  }
+}
+
+@media (min-width: 768px) {
+  .main-content-wrapper.with-footer-padding {
+    padding-bottom: 70vh;
+  }
+}
+
+/* Base body styling with brand fonts */
+body {
+  box-sizing: border-box;
+  font-family: 'Manrope', sans-serif;
+  background-color: var(--brand-dark-bg);
+  color: var(--brand-dark-text);
+  font-size: 18px;
+  line-height: 1.6;
+  overflow-x: hidden; /* Prevent horizontal scrollbar */
+  /* Canvas-specific styles for page transitions */
+  margin: 0;
+  padding: 0;
+}
+
+/* Canvas styles for page transition */
+canvas {
+  display: block; /* Remove extra space below canvas */
+  background-color: #f0f0f0; /* Fallback background for canvas */
+  touch-action: none; /* Prevent browser touch actions on canvas */
+}
+
+/* Brand Typography Classes - Following Design Guide */
+
+/* Hero Loop Word - Outfit 800, 96px */
+.brand-hero-loop {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: clamp(3rem, 8vw, 6rem); /* Responsive sizing for mobile */
+  line-height: 1.1;
+}
+
+/* Hero Heading (H1) - Outfit 700, 64px */
+.brand-hero-heading {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 4rem); /* Responsive sizing for mobile */
+  line-height: 1.15;
+}
+
+/* Section Titles (H2) - Outfit 700, 48px */
+.brand-section-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.75rem, 5vw, 3rem); /* Responsive sizing for mobile */
+  line-height: 1.2;
+}
+
+/* Card Titles / Subsections (H3) - Manrope 500, 24px */
+.brand-card-title {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.125rem, 3vw, 1.5rem); /* Responsive sizing for mobile */
+  line-height: 1.4;
+}
+
+/* Body Text - Manrope 400, 18px */
+.brand-body {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.875rem, 2.5vw, 1.125rem); /* Responsive sizing for mobile */
+  line-height: 1.6;
+}
+
+/* UI/Button Text - Manrope 500, 16px */
+.brand-ui {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
+  font-size: clamp(0.875rem, 2vw, 1rem); /* Responsive sizing for mobile */
+  line-height: 1.0;
+}
+
+/* Subtitles / Metadata - Manrope 400, 16px */
+.brand-subtitle {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.875rem, 2vw, 1rem); /* Responsive sizing for mobile */
+  line-height: 1.4;
+}
+
+/* Brand Logotype for navbar */
+.brand-logotype {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: clamp(1.25rem, 3vw, 1.5rem); /* Responsive sizing for mobile */
+}
+
+/* Brand Gradient */
+.brand-gradient {
+  background: linear-gradient(135deg, var(--brand-accent-start) 0%, var(--brand-accent-end) 100%);
+}
+
+.brand-gradient-text {
+  background: linear-gradient(135deg, var(--brand-accent-start) 0%, var(--brand-accent-end) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 8s linear infinite;
+}
+
+/* Shimmer animation for gradient text */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Brand Button Styles - Following Design Guide */
+
+/* Primary Button - Pill shape, gradient, Manrope 500, 16px, white text */
+.brand-button-primary {
+  background: linear-gradient(135deg, #fece0a 0%, #fece0a 100%);
+  color: black;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
+  font-size: clamp(0.875rem, 2vw, 1rem); /* Responsive sizing for mobile */
+  line-height: 1.0;
+  border-radius: 9999px; /* Pill shape */
+  padding: 0.75rem 2rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.brand-button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(254, 206, 10, 0.3);
+}
+
+/* Secondary Button - Ghost style, muted border, full opacity on hover */
+.brand-button-secondary {
+  background: transparent;
+  color: var(--brand-muted-text);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
+  font-size: clamp(0.875rem, 2vw, 1rem); /* Responsive sizing for mobile */
+  line-height: 1.0;
+  border-radius: 9999px; /* Pill shape */
+  padding: 0.75rem 2rem;
+  border: 1px solid rgba(136, 136, 136, 0.3); /* Muted border */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.brand-button-secondary:hover {
+  color: var(--brand-dark-text);
+  border-color: var(--brand-dark-text);
+  opacity: 1; /* Full opacity on hover */
+}
+
+/* Light theme overrides for secondary button */
+.light .brand-button-secondary {
+  color: var(--brand-muted-text);
+  border-color: rgba(136, 136, 136, 0.3);
+}
+
+.light .brand-button-secondary:hover {
+  color: var(--brand-light-text);
+  border-color: var(--brand-light-text);
+  opacity: 1;
+}
+
+/* Card Styles - Enhanced with proper rounded corners */
+.brand-card {
+  background: var(--brand-light-bg);
+  border-radius: 1.5rem; /* 24px - More pronounced rounded corners */
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.brand-card:hover {
+  border-color: #fece0a;
+  box-shadow: 0 6px 24px rgba(254, 206, 10, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Dark overlay for cards with video backgrounds */
+.brand-card-overlay {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  border-radius: 0.75rem; /* 12px - Rounded corners for overlay */
+  padding: 1rem;
+}
+
+/* Single-Line Mini Player Styles - Positioned at bottom right with transparency */
+.mini-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  height: 80px;
+  width: 600px;
+  max-width: calc(100vw - 40px);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(20px);
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  gap: 16px;
+  opacity: 0.7;
+}
+
+.mini-player:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.95);
+  opacity: 1;
+}
+
+/* Left Section: Book Cover + Play Button */
+.mini-player-left-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.mini-player-cover {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000000; /* Changed from rgba(255, 255, 255, 0.1) to solid black */
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure the book image fills the container properly without showing background */
+.mini-player-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Changed from contain to cover to fill the entire space */
+  object-position: center;
+  border-radius: 8px;
+}
+
+.mini-player-play-btn {
+  background: rgba(254, 206, 10, 0.9);
+  color: black;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.mini-player-play-btn:hover {
+  background: #fece0a;
+  transform: scale(1.1);
+}
+
+/* Center Section: Book Title + Progress Bar */
+.mini-player-center-section {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mini-player-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+.mini-player-progress {
+  height: 6px;
+  cursor: pointer;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.mini-player-progress-bg {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.mini-player-progress-fill {
+  height: 100%;
+  background: #fece0a;
+  transition: width 0.1s ease;
+  border-radius: 3px;
+}
+
+/* Right Section: Control Buttons */
+.mini-player-right-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.mini-player-control-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.mini-player-control-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.mini-player-close-btn:hover {
+  background: rgba(255, 0, 0, 0.2);
+  color: #ff6b6b;
+}
+
+/* Audio Progress Slider Styles - Updated with Yellow Circles */
+.audio-progress-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
+}
+
+.audio-progress-slider::-webkit-slider-runnable-track {
+  background: #9ca3af; /* Grey line */
+  height: 6px;
+  border-radius: 3px;
+  border: none;
+}
+
+.audio-progress-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #fece0a; /* Changed to yellow */
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid #000000; /* Black border for contrast */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  margin-top: -7px;
+}
+
+.audio-progress-slider::-webkit-slider-thumb:hover {
+  background: #e6b809; /* Darker yellow on hover */
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(254, 206, 10, 0.4);
+}
+
+.audio-progress-slider::-moz-range-track {
+  background: #9ca3af; /* Grey line */
+  height: 6px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+}
+
+.audio-progress-slider::-moz-range-thumb {
+  background: #fece0a; /* Changed to yellow */
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid #000000; /* Black border for contrast */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.audio-progress-slider::-moz-range-thumb:hover {
+  background: #e6b809; /* Darker yellow on hover */
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(254, 206, 10, 0.4);
+}
+
+/* Volume Slider Styles - Updated with Yellow Circles */
+.volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
+}
+
+.volume-slider::-webkit-slider-runnable-track {
+  background: #9ca3af; /* Grey line */
+  height: 6px;
+  border-radius: 3px;
+  border: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #fece0a; /* Changed to yellow */
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #000000; /* Black border for contrast */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  margin-top: -6px;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  background: #e6b809; /* Darker yellow on hover */
+  transform: scale(1.1);
+  box-shadow: 0 3px 8px rgba(254, 206, 10, 0.3);
+}
+
+.volume-slider::-moz-range-track {
+  background: #9ca3af; /* Grey line */
+  height: 6px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+}
+
+.volume-slider::-moz-range-thumb {
+  background: #fece0a; /* Changed to yellow */
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #000000; /* Black border for contrast */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.volume-slider::-moz-range-thumb:hover {
+  background: #e6b809; /* Darker yellow on hover */
+  transform: scale(1.1);
+  box-shadow: 0 3px 8px rgba(254, 206, 10, 0.3);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+  
+  .brand-button-primary {
+    padding: 0.625rem 1.5rem;
+    min-width: auto;
+  }
+  
+  .brand-card-overlay {
+    padding: 0.75rem;
+  }
+
+  .mini-player {
+    width: 480px;
+    height: 70px;
+    padding: 10px;
+    gap: 12px;
+    border-radius: 35px;
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .mini-player-cover {
+    width: 40px;
+    height: 40px;
+  }
+
+  .mini-player-play-btn,
+  .mini-player-control-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .mini-player-title {
+    font-size: 13px;
+  }
+
+  .mini-player-progress {
+    height: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mini-player {
+    width: calc(100vw - 32px);
+    height: 64px;
+    padding: 8px;
+    gap: 10px;
+    border-radius: 32px;
+    bottom: 12px;
+    right: 12px;
+  }
+
+  .mini-player-cover {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mini-player-play-btn,
+  .mini-player-control-btn {
+    width: 26px;
+    height: 26px;
+  }
+
+  .mini-player-title {
+    font-size: 12px;
+  }
+
+  .mini-player-progress {
+    height: 4px;
+  }
+
+  .mini-player-right-section {
+    gap: 6px;
+  }
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .brand-gradient-text {
+    animation: none;
+  }
+  
+  /* Disable all motion animations when reduced motion is preferred */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Touch-friendly improvements for mobile */
+@media (max-width: 768px) {
+  button, 
+  .brand-button-primary, 
+  .brand-button-secondary {
+    min-height: 44px; /* iOS recommended touch target size */
+    min-width: 44px;
+  }
+  
+  /* Improve tap targets */
+  .brand-card {
+    min-height: 44px;
+  }
+}
+
+/* Prevent text selection on interactive elements */
+.brand-button-primary,
+.brand-button-secondary,
+.brand-card {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Smooth scrolling for better mobile experience */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimize for mobile viewport */
+@media (max-width: 480px) {
+  .brand-hero-loop {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+  
+  .brand-hero-heading {
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+  }
+  
+  .brand-section-title {
+    font-size: clamp(1.5rem, 7vw, 2.25rem);
+  }
+}
+
+/* Line clamp utility for text truncation */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
