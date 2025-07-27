@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Lenis from 'lenis';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AudioPlayerProvider } from './contexts/AudioPlayerContext';
+import MiniPlayer from './components/MiniPlayer';
 import HomePage from './pages/HomePage';
 import MyLibraryPage from './pages/MyLibraryPage';
 import KidsPage from './pages/KidsPage';
