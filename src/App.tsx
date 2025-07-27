@@ -12,6 +12,7 @@ import AccountPage from './pages/AccountPage';
 import BookPlayerPage from './pages/BookPlayerPage';
 import NotFoundPage from './pages/NotFoundPage';
 import Footer from './components/Footer';
+import MiniPlayer from './components/MiniPlayer';
 
 // Component to handle scroll-to-top on route changes
 const ScrollToTop: React.FC = () => {
@@ -108,6 +109,7 @@ function App() {
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </ConditionalFooterWrapper>
+          <MiniPlayer />
         </Router>
       </AudioPlayerProvider>
     </LanguageProvider>
