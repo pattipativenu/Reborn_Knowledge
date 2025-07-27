@@ -5,7 +5,7 @@ import ShuffleHeroSection from '../components/ShuffleHeroSection';
 
 const HomePage: React.FC = () => {
   return (
-    <>
+    <div>
       {/* Hero Section with Scroll Animation */}
       <section>
         <HeroScrollSection />
@@ -20,7 +20,7 @@ const HomePage: React.FC = () => {
       <section>
         <ShuffleHeroSection />
       </section>
-    </>
+    </div>
   );
 };
 
