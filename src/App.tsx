@@ -13,7 +13,6 @@ import BookPlayerPage from './pages/BookPlayerPage';
 import NotFoundPage from './pages/NotFoundPage';
 import Footer from './components/Footer';
 import MiniPlayer from './components/MiniPlayer';
-import ErrorTestButton from './components/ErrorTestButton';
 
 // Component to handle scroll-to-top on route changes
 const ScrollToTop: React.FC = () => {
@@ -113,9 +112,6 @@ function App() {
           
           {/* Mini Player - Persistent across all pages except book player */}
           <MiniPlayer />
-          
-          {/* Error Test Button - Only shows in development */}
-          <ErrorTestButton />
         </Router>
       </AudioPlayerProvider>
     </LanguageProvider>
