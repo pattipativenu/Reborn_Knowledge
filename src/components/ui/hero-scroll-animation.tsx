@@ -1,6 +1,6 @@
 'use client';
 
-import { useScroll, useTransform, motion, MotionValue } from 'motion/react';
+import { useScroll, useTransform, motion, MotionValue } from 'framer-motion';
 import React, { useRef, forwardRef } from 'react';
 
 interface SectionProps {
