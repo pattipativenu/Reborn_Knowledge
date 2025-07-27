@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import { useNavigate } from 'react-router-dom';
 import { createLibraryUrl } from '@/lib/bookUtils';
+import gsap from 'gsap';
 
 const ShuffleHero = () => {
   const navigate = useNavigate();
@@ -19,56 +20,27 @@ const ShuffleHero = () => {
     { title: "More...", color: "#A9A9A9" }
   ];
 
-  // Load GSAP dynamically as in the original code
-  useEffect(() => {
-    // Check if the script has already been added to avoid duplicates
-    if (document.querySelector('script[src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"]')) {
-      return;
-    }
-
-    // Create a new script element
-    const script = document.createElement('script');
-    script.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js";
-    script.async = true;
-    
-    // Append the script to the document body
-    document.body.appendChild(script);
-
-    // Cleanup function to remove the script when the component unmounts
-    return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
-  }, []);
-
   // Handle mouse enter event for a project item
   const manageMouseEnter = (e: React.MouseEvent<HTMLDivElement>, color: string) => {
-    // Check if the GSAP library is available on the window object before using it
-    if ((window as any).gsap) {
-      (window as any).gsap.to(e.currentTarget, {
-        top: "-2vw",
-        backgroundColor: color,
-        borderTopColor: color,
-        borderBottomColor: color,
-        duration: 0.3
-      });
-    }
+    gsap.to(e.currentTarget, {
+      top: "-2vw",
+      backgroundColor: color,
+      borderTopColor: color,
+      borderBottomColor: color,
+      duration: 0.3
+    });
   };
 
   // Handle mouse leave event, resetting the item's style
   const manageMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Check if GSAP is available on the window object
-    if ((window as any).gsap) {
-      (window as any).gsap.to(e.currentTarget, {
-        top: "0",
-        backgroundColor: "#212121",
-        borderTopColor: "#212121",
-        borderBottomColor: "#212121",
-        duration: 0.3,
-        delay: 0.1
-      });
-    }
+    gsap.to(e.currentTarget, {
+      top: "0",
+      backgroundColor: "#212121",
+      borderTopColor: "#212121",
+      borderBottomColor: "#212121",
+      duration: 0.3,
+      delay: 0.1
+    });
   };
 
   // Handle category click with URL-based navigation
